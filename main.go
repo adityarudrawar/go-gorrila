@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"practice/structures"
-	"practice/validations"
+	"github.com/adityarudrawar/go-gorilla/structures"
+	"github.com/adityarudrawar/go-gorilla/validations"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
@@ -50,9 +50,14 @@ func YourHandlerPOST(w http.ResponseWriter, r *http.Request) {
 	// https://medium.com/geekculture/develop-rest-apis-in-go-using-gorilla-mux-5869b2179a18
 }
 
+func RootHandler(w http.ResponseWriter, r *http.Request){
+	w.Write([]byte("[GET] /gorilla!\r\n[POST]/gorilla => See the readme"))
+}
+
 func main() {
 	r := mux.NewRouter()
 	// Routes consist of a path and a handler function.
+	r.HandleFunc("/", RootHandler).Methods("GET")
 	r.HandleFunc("/gorilla", YourHandlerGET).Methods("GET")
 	r.HandleFunc("/gorilla", YourHandlerPOST).Methods("POST")
 	r.Use(mux.CORSMethodMiddleware(r))

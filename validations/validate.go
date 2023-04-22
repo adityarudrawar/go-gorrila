@@ -1,7 +1,7 @@
 package validations
 
 import (
-	"practice/structures"
+	"github.com/adityarudrawar/go-gorilla/structures"
 )
 
 func makeRange(min, max int) []int {
