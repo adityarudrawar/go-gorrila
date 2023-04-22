@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"practice/structures"
 	"practice/validations"
 
@@ -57,6 +58,9 @@ func main() {
 
 	log.Println("Started Server")
 	// Bind to a port and pass our router in
-	log.Fatal(http.ListenAndServe(":8000", r))
+
+	port := os.Getenv("PORT")
+	println("here is the port",port)
+	log.Fatal(http.ListenAndServe(":" + port, r))
 
 }
