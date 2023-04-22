@@ -10,6 +10,7 @@ import (
 	"practice/validations"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func YourHandlerGET(w http.ResponseWriter, r *http.Request) {
@@ -57,10 +58,10 @@ func main() {
 	r.Use(mux.CORSMethodMiddleware(r))
 
 	log.Println("Started Server")
-	// Bind to a port and pass our router in
+
+	godotenv.Load()
 
 	port := os.Getenv("PORT")
-	println("here is the port",port)
 	log.Fatal(http.ListenAndServe(":" + port, r))
 
 }
