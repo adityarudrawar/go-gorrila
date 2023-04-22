@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/adityarudrawar/go-gorilla/database"
 	"github.com/adityarudrawar/go-gorilla/structures"
 	"github.com/adityarudrawar/go-gorilla/validations"
 
@@ -14,7 +16,13 @@ import (
 )
 
 func YourHandlerGET(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("GET Gorilla!\n"))
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	jsonRespone, err := json.Marshal(database.Gorillas)
+	if err != nil {
+		return
+	}
+	w.Write(jsonRespone)
 }
 
 func YourHandlerPOST(w http.ResponseWriter, r *http.Request) {
@@ -38,6 +46,11 @@ func YourHandlerPOST(w http.ResponseWriter, r *http.Request) {
 	if resp.IsError {
 		w.Write([]byte("BAD Gorilla!\n"))
 	} else {
+		// Write to database
+		if (len(database.Gorillas) < 10){
+			database.Gorillas = append(database.Gorillas, resp)
+		}
+		
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		jsonRespone, err := json.Marshal(resp)
