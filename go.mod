@@ -1,7 +1,8 @@
-module practice
+module github.com/adityarudrawar/go-gorilla
 
-go 1.17
+go 1.19
 
-require github.com/gorilla/mux v1.8.0
-
-require github.com/joho/godotenv v1.5.1 // indirect
+require (
+	github.com/gorilla/mux v1.8.0
+	github.com/joho/godotenv v1.5.1
+)
