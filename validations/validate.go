@@ -15,14 +15,17 @@ func makeRange(min, max int) []int {
 func ValidInputGorillaBody(ipg *structures.InputGorilla) structures.OutputGorilla {
 
 	var opg structures.OutputGorilla
+	opg.Name = ipg.Name
 	opg.Id = ipg.Id
 
+	opg.HasFriends = ipg.HasFriends
 	if ipg.HasFriends {
 		opg.Message = "Monke Good"
 	} else {
 		opg.Message = "Moke Not Good"
 	}
 
+	opg.Medicals = ipg.Medicals
 	if ipg.Medicals.BloodPressure < 90 && !ipg.Medicals.HasSugar && ipg.Medicals.Resp == "GOOD" {
 		opg.IsHealthy = true
 	} else {
@@ -30,6 +33,7 @@ func ValidInputGorillaBody(ipg *structures.InputGorilla) structures.OutputGorill
 	}
 
 	numOfEle := len(ipg.HasLivedIn)
+	opg.HasLivedIn = ipg.HasLivedIn
 
 	opg.Numbering = makeRange(0, numOfEle)
 	opg.IsError = false
